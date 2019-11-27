@@ -73,18 +73,15 @@ public class ShoppingDirectoryImpl implements ShoppingDirectory {
         }
 
         Set<Offer> offersForProduct = offers.get(offer.getProductName().toLowerCase());
+
         if (isNull(offersForProduct)) {
             // we have no other offers for this product
             Set<Offer> newOffers = new TreeSet<>();
             newOffers.add(offer);
 
             offers.put(offer.getProductName().toLowerCase(), newOffers);
-        } else {
-            if (offersForProduct.contains(offer)) {
-                throw new OfferAlreadySubmittedException("Identical offer already exists in the Directory.");
-            }
-
-            offersForProduct.add(offer);
+        } else if (!offersForProduct.add(offer)) {
+            throw new OfferAlreadySubmittedException("Identical offer already exists in the Directory.");
         }
     }
 

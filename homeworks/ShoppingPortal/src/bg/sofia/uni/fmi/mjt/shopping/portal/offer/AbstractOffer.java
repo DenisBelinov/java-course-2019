@@ -1,7 +1,6 @@
 package bg.sofia.uni.fmi.mjt.shopping.portal.offer;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 public abstract class AbstractOffer implements Offer {
     protected final String productName;
@@ -48,29 +47,10 @@ public abstract class AbstractOffer implements Offer {
     public abstract double getTotalPrice();
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof AbstractOffer)) {
-            return false;
-        }
-        AbstractOffer that = (AbstractOffer) o;
-        return Double.compare(that.getTotalPrice(), getTotalPrice()) == 0 &&
-                productName.toLowerCase().equals(that.productName.toLowerCase()) &&
-                date.equals(that.date);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(productName.toLowerCase(), date, getTotalPrice());
-    }
-
-    @Override
     public int compareTo(Offer o) {
         int diff = (int) (getTotalPrice() - o.getTotalPrice());
         if (diff == 0) {
-            if (o.equals(this)) {
+            if (o.getDate().equals(this.date)) {
                 return 0;
             }
             // We have two offers for the same product and the same price.
