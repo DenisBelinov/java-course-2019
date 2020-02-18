@@ -26,13 +26,6 @@ public class Main {
         Server server = new Server(new CommandParser(), commandExecutor);
 
         server.runServer();
-
-        int[] parts = {1,2,3};
-        var a = Arrays.asList(parts);
-        System.out.println(a.getClass());
-        // Unfortunately I am nowhere near completing the project yet. I will need today and tomorrow to finish it.
-        // Sorry for the inconvenience and I would understand a reduced grade as a consequence.
-
         //TODO: Add shutdownhook for the executor service in CommandExecutor
     }
 }
